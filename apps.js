@@ -1,37 +1,36 @@
-//let items=document.getElementsByClassName("list-group-item");
-// items[2].style.backgroundColor="green";
-// for(let i=0;i<items.length;i++)
-// {
-    // items[i].style.fontWeight="bold";
-// }
-// let li = document.getElementsByTagName("li");
-// let item2=document.querySelector("li:nth-child(2)");
-// let item4=document.querySelector("li:nth-child(4)");
-// item4.style.display="none";
+var form=document.getElementById("addForm");
+var itemList=document.getElementById("items");
 
-// let li2 = document.querySelector("li:nth-child(2)");
-// li2.style.color="green";
+form.addEventListener("submit", addItem);
 
-// let li1 = document.querySelectorAll("li:nth-child(odd)");
-// for(let i=0;i<li1.length;i++)
-// li1[i].style.backgroundColor="red";
+itemList.addEventListener("click",removeItem);
 
-let var1=document.querySelector("header");
-// console.log(var1.parentElement);
-// console.log(var1.lastElementChild);
-// console.log(var1.lastChild);
-// console.log(var1.parentElement);
-const para = document.createElement("p");
-para.innerText="This para is added from JS";
-para.setAttribute("title","Hello");
-document.getElementById("main-header").appendChild(para);
-// console.log(var1.firstElementChild);
-// console.log(var1.firstChild);
-// console.log(var1.nextSibling);
-// console.log(var1.nextElementSibling);
-// console.log(var1.previousSibling);
-// console.log(var1.previousElementSibling);
+function addItem(e){
+    e.preventDefault();
+    let nItem= document.getElementById("item").value;
+    let li=document.createElement("li");
+    li.className="list-group-item";
+    li.appendChild(document.createTextNode(nItem));
+   
+   let btn= document.createElement("delbtn");
+   btn.className="btn btn-danger btn-sm float-right delete";
+   btn.appendChild(document.createTextNode("X"));
+   li.appendChild(btn); 
+    itemList.appendChild(li);
+}
 
-let textNode = document.createTextNode("Hello"); 
-document.body.appendChild(textNode);
+function removeItem(e)
+{
+    e.preventDefault();
+    if(e.target.classList.contains("delete"))
+    {
+        if(confirm("Do you want to delete the item"))
+        {
+            let li=e.target.parentElement;
+            itemList.removeChild(li);
+        }
+
+    }
+}
+
 
